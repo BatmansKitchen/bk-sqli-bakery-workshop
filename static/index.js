@@ -37,6 +37,17 @@
   }
 
   function init() {
+    localStorage.setItem(
+      'score',
+      JSON.stringify({
+        'Challenge_1': false,
+        'Challenge_2': false,
+        'Challenge_3': false,
+        'Challenge_4': false,
+        'Challenge_5': false,
+      })
+    );
+
     updateTitleAndDesc();
     document.getElementById("challenge").addEventListener("change", updateTitleAndDesc);
 
@@ -48,21 +59,51 @@
       switch (challenge) {
         case ("1"):
           challenge1(search);
-
+          break;
         case ("2"):
           challenge2(search);
-
+          break;
         case ("3"):
           challenge3(search);
-
+          break;
         case ("4"):
           challenge4(search);
-
+          break;
         case ("5"):
           challenge5(search);
+          break;
+        default:
+          break;
       }
 
     });
+
+    document.getElementById('flagForm').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const flag = document.getElementById('submitFlag').value;
+      fetch('/submit?flag=' + flag)
+        .then(x => x.json())
+        .then(result => {
+          if (result !== false) {
+            let currentScore = JSON.parse(localStorage.getItem('score'));
+            currentScore[result] = true;
+            localStorage.setItem('score', JSON.stringify(currentScore));
+            alert('Correct!');
+          } else {
+            alert('Incorrect!');
+          }
+        });
+    });
+
+    document.getElementById('checkProgress').onclick = (event) => {
+      event.preventDefault();
+      let currentScore = JSON.parse(localStorage.getItem('score'));
+      let display = '';
+      for (const level in currentScore) {
+        display += `${level.replace('_', ' ')}: ${currentScore[level] ? 'Solved' : 'Not Solved'}\n`;
+      }
+      alert(display);
+    };
   }
 
 

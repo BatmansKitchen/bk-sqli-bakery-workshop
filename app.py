@@ -2,9 +2,13 @@ import json
 from flask import Flask, render_template, request
 import os
 import sqlite3
+from dotenv import dotenv_values
 
 # Init Flask app
 app = Flask(__name__, template_folder='templates', static_folder='static')
+
+# NOT PART OF SQL CHALLENGES, YOU CAN IGNORE THIS
+config = dotenv_values('.env')
 
 # Change directory if in PythonAnywhere hosting
 if not os.getcwd().endswith("BKSQLIChallenge"):
@@ -12,7 +16,6 @@ if not os.getcwd().endswith("BKSQLIChallenge"):
         os.chdir("BKSQLIChallenge")
     except:
         None
-
 
 conn1 = sqlite3.connect('databases/challenge1.db', check_same_thread=False)
 conn2 = sqlite3.connect('databases/challenge2.db', check_same_thread=False)
@@ -45,6 +48,17 @@ def challenge2():
         f"SELECT * FROM challenge WHERE bread_name='{query}'"
     ).fetchall()
     return json.dumps(results)
+
+@app.route("/submit", methods=["GET"])
+def submit():
+    flag = request.args.get('flag')
+    if flag is None or len(flag) == 0:
+        return json.dumps(False)
+    for key in config:
+        value = config[key]
+        if flag == value:
+            return json.dumps(key)
+    return json.dumps(False)
 
 if __name__ == '__main__':
     app.run(debug=False)
