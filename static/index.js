@@ -19,7 +19,7 @@
     document.getElementById("search_form").addEventListener("submit", function(event) {
       event.preventDefault();
 
-      search = document.getElementById('search').value;
+      let search = document.getElementById('search').value;
 
       switch (challenge) {
         case ("1"):

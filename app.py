@@ -25,7 +25,7 @@ def challenge1():
     search = request.form["search"]
 
     results = conn1.cursor().execute(
-        "SELECT * FROM challenge WHERE search='" + search + "'"
+        "SELECT * FROM challenge WHERE bread_name='" + search + "'"
     ).fetchall()
 
     return json.dumps(results)
