@@ -5,16 +5,40 @@
 
   let challenge = "1";
 
-  function init() {
-    document.getElementById("challenge").addEventListener("change", function(event) {
+  const descriptions = {
+    '1': `Today we are robbing the Batman's Kitchen bakery. <br>
+    Your goal is to find the secret Gluten-Free Bread recipe in this database.<br><br>
+    Try typing in 'Whole Wheat Bread' to see what happens.<br>
+    Everything else results in a blank result... or weird behavior if you input the right thing.<br>
+    Let's get this bread!`,
+
+    '2': `Oh no! The Batman's Kitchen bakery patched the vulnerability!<br>
+    They implemented a filter that seems to block certain queries...<br><br>
+    Your next goal is to bypass this filter, and find the new secret bread!<br>
+    Let's get this bread!<br>`,
+
+    '3': `Add chall 3 description here...`,
+
+    '4': `Add chall 4 description here...`,
+
+    '5': `Add chall 5 description here...`,
+  }
+
+  function updateTitleAndDesc(event) {
+    if (event !== undefined && event !== null) {
       event.preventDefault();
+    }
 
-      challenge = document.getElementById("challenge").value;
+    challenge = document.getElementById("challenge").value;
 
-      // Change values for Challenge Title and Description
-      document.getElementById("challengetitle").textContent = "Challenge " + challenge;
+    // Change values for Challenge Title and Description
+    document.getElementById("challengetitle").textContent = "Challenge " + challenge;
+    document.getElementById('challengedesc').innerHTML = descriptions[challenge];
+  }
 
-    });
+  function init() {
+    updateTitleAndDesc();
+    document.getElementById("challenge").addEventListener("change", updateTitleAndDesc);
 
     document.getElementById("search_form").addEventListener("submit", function(event) {
       event.preventDefault();
@@ -65,7 +89,17 @@
     let params = new FormData();
     params.append("search", search);
 
-
+    fetch('/challenge2', {method: 'POST', body:params})
+      .then(statusCheck)
+      .then(resp => resp.text())
+      .then(resp => {
+        console.log(resp);
+        if (document.getElementById('output_field').childNodes.length > 0) {
+          document.getElementById('output_field').innerHTML = '';
+        }
+        document.getElementById('output_field').appendChild(tableCreator(resp));
+      })
+      .catch(resp => { document.getElementById('output_field').textContent = resp; })
   }
 
   async function challenge3(search) {
