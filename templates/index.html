@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+    <head>
+        <title>BK SQL Challenge Website</title>
+        <meta name="description" content="sql challenge">
+        <meta name="keywords" content="sql challenge">
+        <link rel="stylesheet" href="static/styles.css">
+        <script src="static/index.js"></script>
+    </head>
+    <body>
+        <div id="main">
+            <nav>
+                <label for="challenge">Choose a challenge:</label>
+                <select name="challenge" id="challenge">
+                    <option value="1" selected>Challenge 1</option>
+                    <option value="2">Challenge 2</option>
+                    <option value="3">Challenge 3</option>
+                    <option value="4">Challenge 4</option>
+                    <option value="5">Challenge 5</option>
+                </select>
+            </nav>
+            <h1>Search Query Language (SQL)</h1>
+            <h2 id="challengetitle">Challenge 1</h2>
+            <h3>Batman's Kitchen</h3>
+            <p>
+                Today we are robbing the Batman's Kitchen bakery. <br>
+                Your goal is to find the secret Gluten-Free Bread recipe in this database.<br><br>
+
+                Try typing in 'Whole Wheat Bread' to see what happens.<br>
+                Everything else results in a blank result... or weird behavior if you input the right thing.<br>
+                Let's get this bread!
+            </p>
+            <form id="search_form">
+                <label for="search">search</label>
+                <input type="text" id="search" name="search" autocomplete="off" required>
+                <button type="submit">Submit</button>
+            </form>
+            <br>
+            <div id="output_field" class="boxy"></div>
+        </div>
+    </body>
+</html>

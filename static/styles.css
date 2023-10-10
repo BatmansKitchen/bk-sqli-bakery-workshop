@@ -1,0 +1,31 @@
+html, body {
+  height: 100%;
+  color: #8d3b00;
+}
+
+html {
+  display: table;
+  margin: auto;
+}
+
+body {
+  vertical-align: middle;
+  justify-content: center;
+  align-items: center;
+  background-color: blanchedalmond;
+  background-image: url("img/bread.png");
+  font-family: monospace;
+}
+
+.boxy {
+  border-width: 3px;
+  border: 2px solid #8d3b00;
+}
+
+#main {
+  background-color: blanchedalmond;
+  margin: 40px;
+  padding: 40px;
+  border: 4px solid #8d3b00;
+  border-radius: 10px;
+}
