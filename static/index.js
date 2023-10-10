@@ -94,18 +94,6 @@
     let table = document.createElement("table");
 
     table.setAttribute("id", "sql_table");
-    let header = document.createElement("tr");
-
-    let header0 = document.createElement("td");
-    header0.textContent = "Search";
-    let header1 = document.createElement("td");
-    header1.textContent = "Answer";
-
-    header.appendChild(header0);
-
-    header.appendChild(header1);
-
-    table.appendChild(header);
 
     let result = JSON.parse(resp);
 
