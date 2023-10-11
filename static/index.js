@@ -22,9 +22,9 @@
     They claim it's not bypassable, but we all know that's not true.<br>
     Can you defeat this filter?<br>`,
 
-    '4': `Add chall 4 description here...`,
+    '4': `<img src="static/img/challenge_4.png" />`,
 
-    '5': `Add chall 5 description here...`,
+    '5': `Wow. Four hacks in a row. The Batman's Kitchen bakery has decided to stop giving you output.<br> Please go hack another website now. It's over.<br>`,
   }
 
   function updateTitleAndDesc(event) {
@@ -167,16 +167,35 @@
     let params = new FormData();
     params.append("search", search);
 
-
+    fetch('/challenge4', {method: 'POST', body:params})
+      .then(statusCheck)
+      .then(resp => resp.text())
+      .then(resp => {
+        console.log(resp);
+        if (document.getElementById('output_field').childNodes.length > 0) {
+          document.getElementById('output_field').innerHTML = '';
+        }
+        document.getElementById('output_field').appendChild(tableCreator(resp));
+      })
+      .catch(resp => { document.getElementById('output_field').textContent = resp; })
   }
 
   async function challenge5(search) {
     let params = new FormData();
     params.append("search", search);
 
-
+    fetch('/challenge5', {method: 'POST', body:params})
+      .then(statusCheck)
+      .then(resp => resp.text())
+      .then(resp => {
+        console.log(resp);
+        if (document.getElementById('output_field').childNodes.length > 0) {
+          document.getElementById('output_field').innerHTML = '';
+        }
+        document.getElementById('output_field').appendChild(tableCreator(resp));
+      })
+      .catch(resp => { document.getElementById('output_field').textContent = resp; })
   }
-
 
   let tableCreator = (function(resp) {
     let table = document.createElement("table");

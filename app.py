@@ -20,6 +20,8 @@ if not os.getcwd().endswith("BKSQLIChallenge"):
 conn1 = sqlite3.connect('databases/challenge1.db', check_same_thread=False)
 conn2 = sqlite3.connect('databases/challenge2.db', check_same_thread=False)
 conn3 = sqlite3.connect('databases/challenge3.db', check_same_thread=False)
+conn4 = sqlite3.connect('databases/challenge4.db', check_same_thread=False)
+conn5 = sqlite3.connect('databases/challenge5.db', check_same_thread=False)
 
 @app.route("/")
 def main():
@@ -71,6 +73,43 @@ def challenge3():
         return json.dumps(results)
     except sqlite3.Error as err:
         return json.dumps([['error:', str(err)]])
+
+@app.route("/challenge4", methods=["POST"])
+def challenge4():
+    query = request.form["search"]
+
+    try:
+        results = conn4.cursor().execute(
+            f"SELECT * FROM decoy WHERE c1='{query}'"
+        ).fetchall()
+        return json.dumps(results)
+    except sqlite3.Error as err:
+        return (json.dumps([['error:',str(err)]]))
+
+@app.route("/challenge5", methods=["POST"])
+def challenge5():
+    query = request.form["search"]
+
+    # Wait.. what if I just don't show you output anymore :D 
+    # The bakery is closed you can't hack me anymore.
+
+    try:
+        results = conn5.cursor().execute(
+            f"SELECT * FROM challenge WHERE bread_name LIKE '{query}'"
+        ).fetchall()
+
+        # I found this cool random function that gives you garbage output!
+        # If I ask it for a lot of bytes it takes some time though
+        # I wonder if that's a problem somehow..
+        fake_results = conn5.cursor().execute(
+            f"SELECT randomblob(10)"
+        ).fetchall()
+        
+        output = [('garbage output', fake_results[0][0].hex())]
+
+        return json.dumps(output)
+    except sqlite3.Error as err:
+        return (json.dumps([['error:',str(err)]]))
 
 @app.route("/submit", methods=["GET"])
 def submit():
