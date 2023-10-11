@@ -17,7 +17,10 @@
     Your next goal is to bypass this filter, and find the new secret bread!<br>
     Let's get this bread!<br>`,
 
-    '3': `Add chall 3 description here...`,
+    '3': `Great job! After your exploits, the Batman's Kitchen bakery hired some new security folks.<br>
+    They strengthened their filter, and made it much more restrictive...<br><br>
+    They claim it's not bypassable, but we all know that's not true.<br>
+    Can you defeat this filter?<br>`,
 
     '4': `Add chall 4 description here...`,
 
@@ -147,7 +150,17 @@
     let params = new FormData();
     params.append("search", search);
 
-
+    fetch('/challenge3', {method: 'POST', body:params})
+      .then(statusCheck)
+      .then(resp => resp.text())
+      .then(resp => {
+        console.log(resp);
+        if (document.getElementById('output_field').childNodes.length > 0) {
+          document.getElementById('output_field').innerHTML = '';
+        }
+        document.getElementById('output_field').appendChild(tableCreator(resp));
+      })
+      .catch(resp => { document.getElementById('output_field').textContent = resp; })
   }
 
   async function challenge4(search) {
