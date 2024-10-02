@@ -94,18 +94,20 @@ def challenge5():
     # The bakery is closed you can't hack me anymore.
 
     try:
+        stmt = f"SELECT * FROM challenge WHERE bread_name LIKE '{query}'"
+        print(stmt)
         results = conn5.cursor().execute(
-            f"SELECT * FROM challenge WHERE bread_name LIKE '{query}'"
+            stmt
         ).fetchall()
 
         # I found this cool random function that gives you garbage output!
         # If I ask it for a lot of bytes it takes some time though
         # I wonder if that's a problem somehow..
-        fake_results = conn5.cursor().execute(
-            f"SELECT randomblob(10)"
-        ).fetchall()
+        # fake_results = conn5.cursor().execute(
+        #     f"SELECT randomblob(10)"
+        # ).fetchall()
         
-        output = [('garbage output', fake_results[0][0].hex())]
+        output = [('no output for you!',)]
 
         return json.dumps(output)
     except sqlite3.Error as err:
