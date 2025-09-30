@@ -47,7 +47,7 @@ def challenge2():
     query = request.form["search"]
 
     # I heard blacklists are secure...
-    if ('or' in query) or ('=' in query) or has_numbers(query):
+    if ('or' in query) or ('OR' in query) or ('=' in query) or has_numbers(query):
         return json.dumps([["Hack detected!", "No flag for you..."]])
 
     try:
@@ -58,7 +58,8 @@ def challenge2():
     except sqlite3.Error as err:
         return json.dumps([['error:', str(err)]])
 
-@app.route("/challenge3", methods=["POST"])
+# daniel is cracked chall
+@app.route("/challenge5", methods=["POST"])
 def challenge3():
     query = request.form["search"]
 
@@ -67,26 +68,26 @@ def challenge3():
         return json.dumps([["Hack detected!", "No flag for you..."]])
 
     try:
-        results = conn3.cursor().execute(
+        results = conn5.cursor().execute(
             f"SELECT * FROM challenge WHERE bread_name='{query}'"
         ).fetchall()
         return json.dumps(results)
     except sqlite3.Error as err:
         return json.dumps([['error:', str(err)]])
 
-@app.route("/challenge4", methods=["POST"])
+@app.route("/challenge3", methods=["POST"])
 def challenge4():
     query = request.form["search"]
 
     try:
-        results = conn4.cursor().execute(
+        results = conn3.cursor().execute(
             f"SELECT * FROM decoy WHERE c1='{query}'"
         ).fetchall()
         return json.dumps(results)
     except sqlite3.Error as err:
         return (json.dumps([['error:',str(err)]]))
 
-@app.route("/challenge5", methods=["POST"])
+@app.route("/challenge4", methods=["POST"])
 def challenge5():
     query = request.form["search"]
 
@@ -96,7 +97,7 @@ def challenge5():
     try:
         stmt = f"SELECT * FROM challenge WHERE bread_name LIKE '{query}'"
         print(stmt)
-        results = conn5.cursor().execute(
+        results = conn4.cursor().execute(
             stmt
         ).fetchall()
 
