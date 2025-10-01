@@ -1,6 +1,7 @@
-html, body {
+html,
+body {
   height: 100%;
-  color: #8d3b00;
+  color: #af1818;
 }
 
 html {
@@ -12,20 +13,20 @@ body {
   vertical-align: middle;
   justify-content: center;
   align-items: center;
-  background-color: blanchedalmond;
-  background-image: url("img/bread.png");
+  background-color: rgb(255, 246, 233);
+  background-image: url("img/redcross2.png");
   font-family: monospace;
 }
 
 .boxy {
   border-width: 3px;
-  border: 2px solid #8d3b00;
+  border: 2px solid #af1818;
 }
 
 #main {
-  background-color: blanchedalmond;
+  background-color: rgb(254, 250, 244);
   margin: 40px;
   padding: 40px;
-  border: 4px solid #8d3b00;
+  border: 4px solid #af1818;
   border-radius: 10px;
 }

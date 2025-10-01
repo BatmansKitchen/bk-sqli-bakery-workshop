@@ -1,30 +1,29 @@
 'use strict';
 
-(function() {
+(function () {
   window.addEventListener('load', init);
 
   let challenge = "1";
 
   const descriptions = {
-    '1': `Today we are robbing the Batman's Kitchen bakery. <br>
-    Your goal is to find the secret Gluten-Free Bread recipe in this database.<br><br>
-    Try typing in 'Whole Wheat Bread' to see what happens.<br>
+    '1': `Today we are robbing the Batman's Kitchen urgent care clinic. <br>
+    Your goal is to find other user's health information in this database.<br><br>
+    Try typing in 'John Doe' to see what happens.<br>
     Everything else results in a blank result... or weird behavior if you input the right thing.<br>
     Let's get this bread!`,
 
-    '2': `Oh no! The Batman's Kitchen bakery patched the vulnerability!<br>
+    '2': `Oh no! The Batman's Kitchen urgent care clinic patched the vulnerability!<br>
     They implemented a filter that seems to block certain queries...<br><br>
-    Your next goal is to bypass this filter, and find the new secret bread!<br>
+    Your next goal is to bypass this filter, and find more patient health information!<br>
     Let's get this bread!<br>`,
 
-    '3': `Great job! After your exploits, the Batman's Kitchen bakery hired some new security folks.<br>
-    They strengthened their filter, and made it much more restrictive...<br><br>
+    '3': `<img src="static/img/challenge_4.png" />`,
+
+    '4': `Wow. Four hacks in a row. The Batman's Kitchen urgent care clinic has decided to stop giving you output.<br> Please go hack another website now. It's over.<br>`,
+
+    '5': `Great job! After your exploits, the Batman's Kitchen clinic hired some new security folks.<br> They strengthened their filter, and made it much more restrictive...<br><br>
     They claim it's not bypassable, but we all know that's not true.<br>
     Can you defeat this filter?<br>`,
-
-    '4': `<img src="static/img/challenge_4.png" />`,
-
-    '5': `Wow. Four hacks in a row. The Batman's Kitchen bakery has decided to stop giving you output.<br> Please go hack another website now. It's over.<br>`,
   }
 
   function updateTitleAndDesc(event) {
@@ -54,7 +53,7 @@
     updateTitleAndDesc();
     document.getElementById("challenge").addEventListener("change", updateTitleAndDesc);
 
-    document.getElementById("search_form").addEventListener("submit", function(event) {
+    document.getElementById("search_form").addEventListener("submit", function (event) {
       event.preventDefault();
 
       let search = document.getElementById('search').value;
@@ -114,10 +113,10 @@
     let params = new FormData();
     params.append("search", search);
 
-    fetch("/challenge1", {method: "POST", body: params})
+    fetch("/challenge1", { method: "POST", body: params })
       .then(statusCheck)
       .then(resp => resp.text())
-      .then(function(resp) {
+      .then(function (resp) {
         console.log(resp);
         if (document.getElementById("output_field").childNodes.length > 0) {
           document.getElementById("output_field").innerHTML = "";
@@ -133,7 +132,7 @@
     let params = new FormData();
     params.append("search", search);
 
-    fetch('/challenge2', {method: 'POST', body:params})
+    fetch('/challenge2', { method: 'POST', body: params })
       .then(statusCheck)
       .then(resp => resp.text())
       .then(resp => {
@@ -150,7 +149,7 @@
     let params = new FormData();
     params.append("search", search);
 
-    fetch('/challenge3', {method: 'POST', body:params})
+    fetch('/challenge3', { method: 'POST', body: params })
       .then(statusCheck)
       .then(resp => resp.text())
       .then(resp => {
@@ -167,7 +166,7 @@
     let params = new FormData();
     params.append("search", search);
 
-    fetch('/challenge4', {method: 'POST', body:params})
+    fetch('/challenge4', { method: 'POST', body: params })
       .then(statusCheck)
       .then(resp => resp.text())
       .then(resp => {
@@ -184,7 +183,7 @@
     let params = new FormData();
     params.append("search", search);
 
-    fetch('/challenge5', {method: 'POST', body:params})
+    fetch('/challenge5', { method: 'POST', body: params })
       .then(statusCheck)
       .then(resp => resp.text())
       .then(resp => {
@@ -197,7 +196,7 @@
       .catch(resp => { document.getElementById('output_field').textContent = resp; })
   }
 
-  let tableCreator = (function(resp) {
+  let tableCreator = (function (resp) {
     let table = document.createElement("table");
 
     table.setAttribute("id", "sql_table");
