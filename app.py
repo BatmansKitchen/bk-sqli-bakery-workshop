@@ -33,7 +33,7 @@ def challenge1():
 
     try:
         results = conn1.cursor().execute(
-            "SELECT * FROM patients WHERE bread_name='" + search + "'"
+            "SELECT * FROM patients WHERE name='" + search + "'"
         ).fetchall()
         return json.dumps(results)
     except sqlite3.Error as err:
@@ -52,7 +52,7 @@ def challenge2():
 
     try:
         results = conn2.cursor().execute(
-            f"SELECT * FROM patients WHERE bread_name='{query}'"
+            f"SELECT * FROM patients WHERE name='{query}'"
         ).fetchall()
         return json.dumps(results)
     except sqlite3.Error as err:
@@ -69,7 +69,7 @@ def challenge3():
 
     try:
         results = conn5.cursor().execute(
-            f"SELECT * FROM patients WHERE bread_name='{query}'"
+            f"SELECT * FROM patients WHERE name='{query}'"
         ).fetchall()
         return json.dumps(results)
     except sqlite3.Error as err:
@@ -95,7 +95,7 @@ def challenge5():
     # The bakery is closed you can't hack me anymore.
 
     try:
-        stmt = f"SELECT * FROM patients WHERE bread_name LIKE '{query}'"
+        stmt = f"SELECT * FROM patients WHERE name LIKE '{query}'"
         print(stmt)
         results = conn4.cursor().execute(
             stmt

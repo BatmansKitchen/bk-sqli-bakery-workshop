@@ -6,7 +6,7 @@
   let challenge = "1";
 
   const descriptions = {
-    '1': `Today we are robbing the Batman's Kitchen urgent care clinic. <br>
+    '1': `Today we are hacking the Batman's Kitchen urgent care clinic. <br>
     Your goal is to find other user's health information in this database.<br><br>
     Try typing in 'John Doe' to see what happens.<br>
     Everything else results in a blank result... or weird behavior if you input the right thing.<br>
